@@ -7,18 +7,7 @@ export interface LoginDto {
   password: string;
 }
 
-export interface RegisterDto {
-  username: string;
-  password: string;
-  email: string;
-}
-
-export const login = async (loginDto: LoginDto) => {
-  const response = await api.post('/login', loginDto);
-  return response.data;
-};
-
-export const register = async (registerDto: RegisterDto) => {
-  const response = await api.post('/register', registerDto);
+export const login = async (credentials: LoginDto) => {
+  const response = await api.post('/login', credentials);
   return response.data;
 };

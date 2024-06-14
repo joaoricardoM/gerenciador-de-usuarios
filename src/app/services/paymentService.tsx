@@ -1,28 +1,38 @@
-import api from "../api/api";
+import axios from "axios";
 
+const API_URL = "http://192.168.1.201:3000/payments";
 
 export interface CreatePaymentDto {
-    accountId: number;
-    value: number;
-    date: string;
-    description: string;
+	accountId: number;
+	value: number;
+	date: string;
+	description: string;
 }
 
-export const createPayment = async (paymentDto: CreatePaymentDto, file: File) => {
-    const formData = new FormData();
-    formData.append('file', file)
-    formData.append('accountId', paymentDto.accountId.toString());
-    formData.append('value', paymentDto.value.toString());
-    formData.append('date', paymentDto.date);
-    formData.append('description', paymentDto.description);
+export const createPayment = async (
+	paymentDto: CreatePaymentDto,
+	files: File[]
+) => {
+    const requestData = {
+        accountId: paymentDto.accountId,
+        value: paymentDto.value,
+        date: paymentDto.date,
+        description: paymentDto.description,
+      };
 
-    const response = await api.post('/payments', formData, {
-        headers: {
-            'Content-Type': 'multipart/form-data'
-        }
-    })
-    console.log(response)
+      if (files?.length > 0) {
+        const formData = new FormData();
+        files.forEach((file) => {
+          formData.append("files", file);
+        });
+      }
 
-    return response.data
+	console.log("requestData", requestData);
 
+	return axios.post(API_URL, requestData);
+};
+
+
+export const getPayment = async () => {
+  return axios.get(API_URL)
 }
