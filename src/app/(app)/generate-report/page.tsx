@@ -59,8 +59,6 @@ const GenerateReport: React.FC = () => {
 
 			console.log("Relatório gerado com sucesso:", response);
 			setTimeout(() => router.push("/home"), 3000);
-
-			toast.success("Relatório gerado com sucesso!");
 		} catch (error) {
 			console.error("Erro ao gerar relatório:", error);
 			toast.error("Erro ao gerar relatório.");
@@ -88,12 +86,12 @@ const GenerateReport: React.FC = () => {
 								valueAsNumber: true,
 							})}
 							id="accountId"
-							placeholder="ID da Conta"
+							placeholder="Número da Conta"
 							className="w-full mt-2 p-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
 						/>
 						{errors.accountId && (
 							<p className="text-red-500 text-sm mt-1">
-								ID da Conta é obrigatório
+								Número da Conta é obrigatório
 							</p>
 						)}
 					</div>
